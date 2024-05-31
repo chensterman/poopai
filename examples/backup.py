@@ -1,5 +1,3 @@
-import sys
-sys.path.append('..')
 from poopai.drivers import OpenAIDriver
 from poopai.tools import GoogleSerperApiTool, WebScrapeTool
 from poopai.agents import RAISEAgent, AgentResult
