@@ -32,11 +32,13 @@ class RAISEAgent(BaseAgent):
     
     def refresh_memory(self):
         memory = f"""
-            YOU ARE AN AI AGENT GIVEN THE FOLLOWING ROLE:
+            ~~~YOU ARE AN AI AGENT GIVEN THE FOLLOWING ROLE:
             {self.description}
 
-            YOU ARE TO COMPLETE THE TASK BASED ON THE FOLLOWING PROGRESS:
+            ~~~SO FAR YOUR SRATCHPAD CONTAINS THE FOLLOWING:
             {self._scratchpad}
+
+            ~~~NOW PROCEED WITH NOVEL TASKS:
         """
         return textwrap.dedent(memory)
     
@@ -47,7 +49,8 @@ class RAISEAgent(BaseAgent):
             system_prompt=memory,
             tools=self.tools,
         )
-        self._scratchpad.append(f"plan: {plan}")
+        self._scratchpad.append(
+           f"ALL PREVIOUS PLANS ARE COMPLETE ***** NEW PLAN: {plan}")
         yield plan
 
         memory = self.refresh_memory()
